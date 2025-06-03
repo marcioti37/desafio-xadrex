@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+// Função para verificar se o movimento do cavalo é válido
+int movimentoValidoDoCavalo(int x1, int y1, int x2, int y2) {
+    int dx = abs(x2 - x1); // Diferença horizontal
+    int dy = abs(y2 - y1); // Diferença vertical
+
+    // Movimento em L: 2 casas numa direção e 1 na outra
+    return (dx == 2 && dy == 1) || (dx == 1 && dy == 2);
+}
+
+int main() {
+    int cavaloX, cavaloY;
+    int inimigoX, inimigoY;
+
+    // Entrada da posição do cavalo
+    printf("Digite a posição do cavalo (linha e coluna de 0 a 7):\n");
+    scanf("%d %d", &cavaloX, &cavaloY);
+
+    // Entrada da posição do inimigo
+    printf("Digite a posição da peça inimiga (linha e coluna de 0 a 7):\n");
+    scanf("%d %d", &inimigoX, &inimigoY);
+
+    // Verificação de posições válidas
+    if (cavaloX < 0 || cavaloX > 7 || cavaloY < 0 || cavaloY > 7 ||
+        inimigoX < 0 || inimigoX > 7 || inimigoY < 0 || inimigoY > 7) {
+        printf("Posições inválidas! Use valores de 0 a 7.\n");
+        return 1;
+    }
+
+    // Verifica se o cavalo pode capturar a peça
+    if (movimentoValidoDoCavalo(cavaloX, cavaloY, inimigoX, inimigoY)) {
+        printf("O cavalo PODE capturar a peça inimiga em uma jogada!\n");
+    } else {
+        printf("O cavalo NAO pode capturar a peça inimiga em uma jogada.\n");
+    }
+
+    return 0;
+}
